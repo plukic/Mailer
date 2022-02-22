@@ -1,0 +1,25 @@
+﻿<div id="modal-container" class="modal fade" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" id="main-modal">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#modal-container, #modal-container-location').on('show.bs.modal',
+        function (event) {
+            var button = $(event.relatedTarget),
+                url = button.attr("href"),
+                modal = $(this),
+                size = button.data("modal-size"),
+                position = button.data("modal-position");
+            modal.find('#main-modal')
+                .prop('class', 'modal-dialog modal-simple').addClass('modal-' + size).addClass('modal-' + position);
+            var modalContent = modal.find('.modal-content');
+            modalContent.load(url);
+        });
+    $('#modal-container #modal-container-location').on('hidden.bs.modal',
+        function () {
+            $(this).removeData('bs.modal');
+            $(this).find('.modal-content').empty();
+        });
+</script>
