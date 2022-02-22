@@ -10,6 +10,8 @@ namespace Mailer.Core.Security.Users
     {
         bool IsAuthenticated { get; }
         string UserName { get; }
+        string Email { get; }
+        string Name { get; }
         string? Id { get; }
         string[] Roles { get; }
 

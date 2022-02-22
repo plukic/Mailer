@@ -13,7 +13,8 @@ namespace Mailer.Web.Services.ExternalLogin
             //we can use this later as a external Id
             string uniqueId = ctx.Principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
-            //for demo lets say that nickname is both email and username
+            //for demo we will use users email as a unique key in database 
+            //email will be used for filtering
             string email = ctx.Principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
             string fullName = ctx.Principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.GivenName)?.Value + " " +
                 ctx.Principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Surname)?.Value;

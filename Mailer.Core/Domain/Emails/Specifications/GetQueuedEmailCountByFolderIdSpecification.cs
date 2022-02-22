@@ -10,13 +10,15 @@ namespace Mailer.Core.Domain.Emails.Specifications
 {
     internal class GetQueuedEmailCountByFolderIdSpecification : Specification<QueuedEmail>
     {
-        public GetQueuedEmailCountByFolderIdSpecification(FolderType folderId, 
-            EmailPriority? emailPriority = null, 
+        public GetQueuedEmailCountByFolderIdSpecification(FolderType folderId,
+            string currentUserEmail,
+            EmailPriority? emailPriority = null,
             string searchTerm = null)
         {
             var searchTermNormalized = searchTerm?.ToUpper();
             Query
                 .Where(x => x.FolderId == folderId)
+                .Where(x => x.From == currentUserEmail)
                 .WhereIf(emailPriority.HasValue, x => x.EmailPriority == emailPriority)
                 .WhereIf(searchTermNormalized.IsNotNullOrEmpty(), x => x.To.ToUpper().Contains(searchTermNormalized));
         }

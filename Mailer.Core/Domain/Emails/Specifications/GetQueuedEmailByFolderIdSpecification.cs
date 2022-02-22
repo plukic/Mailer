@@ -8,11 +8,12 @@ namespace Mailer.Core.Domain.Emails.Specifications
     {
 
 
-        public GetQueuedEmailByFolderIdSpecification(FolderType folderId, EmailPriority? emailPriority, string searchTerm, int page, int pageSize)
+        public GetQueuedEmailByFolderIdSpecification(FolderType folderId, string currentUserEmail, EmailPriority? emailPriority, string searchTerm, int page, int pageSize)
         {
             var searchTermNormalized = searchTerm?.ToUpper();
             Query
                 .Where(x => x.FolderId == folderId)
+                .Where(x => x.From == currentUserEmail)
                 .WhereIf(emailPriority.HasValue, x => x.EmailPriority == emailPriority)
                 .WhereIf(searchTermNormalized.IsNotNullOrEmpty(), x => x.To.ToUpper().Contains(searchTermNormalized))
                 .Skip(page * pageSize)

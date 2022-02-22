@@ -31,6 +31,8 @@ namespace Mailer.Core.Security.Users
         public bool IsAuthenticated => !string.IsNullOrEmpty(Id);
 
         public string UserName => this.FindClaimValue(ClaimTypes.Name);
+        public string Email => this.FindClaimValue(ClaimTypes.Email);
+        public string Name => this.FindClaimValue(MailerClaimTypes.Name);
 
         public string? Id => _currentPrincipalAccessor.Principal.GetUserId();
 

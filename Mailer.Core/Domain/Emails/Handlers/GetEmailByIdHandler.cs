@@ -4,6 +4,7 @@ using Mailer.Core.Data;
 using Mailer.Core.Domain.Emails.Dtos;
 using Mailer.Core.Domain.Emails.Requests;
 using Mailer.Core.Domain.Emails.Specifications;
+using Mailer.Core.Security.Users;
 using MediatR;
 
 namespace Mailer.Core.Domain.Emails.Handlers
@@ -12,16 +13,18 @@ namespace Mailer.Core.Domain.Emails.Handlers
     {
         private IRepository<QueuedEmail> _repository;
         private IMapper _mapper;
+        private ICurrentUser _currentUser;
 
-        public GetEmailByIdHandler(IRepository<QueuedEmail> repository, IMapper mapper)
+        public GetEmailByIdHandler(IRepository<QueuedEmail> repository, IMapper mapper, ICurrentUser currentUser)
         {
             _repository = repository;
             _mapper = mapper;
+            _currentUser = currentUser;
         }
 
         public async Task<Result<EmailDto>> Handle(GetEmailByIdRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _repository.GetBySpecAsync(new GetQueuedEmailByIdSpecification(request.EmailId));
+            var entity = await _repository.GetBySpecAsync(new GetQueuedEmailByIdSpecification(request.EmailId, _currentUser.Email));
             if (entity == null)
             {
                 return Result<EmailDto>.NotFound();

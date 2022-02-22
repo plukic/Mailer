@@ -5,6 +5,7 @@ using Mailer.Core.Data;
 using Mailer.Core.Domain.Emails.Dtos;
 using Mailer.Core.Domain.Emails.Requests;
 using Mailer.Core.Domain.Emails.Specifications;
+using Mailer.Core.Security.Users;
 using MediatR;
 
 namespace Mailer.Core.Domain.Emails.Handlers
@@ -15,14 +16,16 @@ namespace Mailer.Core.Domain.Emails.Handlers
         private IRepository<QueuedEmail> _repository;
         private IMapper _mapper;
         private IMediator _mediator;
+        private ICurrentUser _currentUser;
         private EmailConfiguration _emailConfiguration;
 
-        public SendEmailHandler(IRepository<QueuedEmail> repository, IMapper mapper, IMediator mediator, EmailConfiguration eailConfiguration)
+        public SendEmailHandler(IRepository<QueuedEmail> repository, IMapper mapper, IMediator mediator, EmailConfiguration eailConfiguration, ICurrentUser currentUser)
         {
             _repository = repository;
             _mapper = mapper;
             _mediator = mediator;
             _emailConfiguration = eailConfiguration;
+            _currentUser = currentUser;
         }
 
         public async Task<Result<EmailDto>> Handle(SendEmailRequest request, CancellationToken cancellationToken)
@@ -59,8 +62,8 @@ namespace Mailer.Core.Domain.Emails.Handlers
                 FolderId = Folders.FolderType.Sent,
                 SentOnUtc = DateTime.UtcNow,
                 Subject = request.Data.Subject,
-                From = _emailConfiguration.From,
-                FromName = _emailConfiguration.FromName,
+                From = _currentUser.Email,
+                FromName = _currentUser.Name,
                 ReplyTo = _emailConfiguration.ReplyTo,
                 ReplyToName = _emailConfiguration.ReplyToName,
             };
@@ -72,7 +75,7 @@ namespace Mailer.Core.Domain.Emails.Handlers
 
         private async Task<Result<EmailDto>> SendFromDraftEmail(SendEmailRequest request)
         {
-            var draftEmail = await _repository.GetBySpecAsync(new GetQueuedDraftEmailByIdSpecification(request.Data.Id.Value));
+            var draftEmail = await _repository.GetBySpecAsync(new GetQueuedDraftEmailByIdSpecification(request.Data.Id.Value, _currentUser.Email));
             if (draftEmail == null)
                 return Result<EmailDto>.NotFound();
 
