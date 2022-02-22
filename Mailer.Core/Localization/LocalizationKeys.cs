@@ -39,6 +39,7 @@ namespace Mailer.Core.Localization
         public const string Send = nameof(Send);
         public const string Discard = nameof(Discard);
         public const string Folders = nameof(Folders);
+        public const string EmptyTableText = nameof(EmptyTableText);
 
     }
 }

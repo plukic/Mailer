@@ -30,8 +30,8 @@
         </div>
     </div>
     <div class="card-body p-0">
-        <div class="table-responsive mailbox-messages">
-            <table class="table table-hover table-striped">
+        <div include-if="@Model.Emails.Any()" class="table-responsive mailbox-messages">
+            <table class="table table-hover ">
                 <tbody>
                     @foreach (var item in Model.Emails)
                     {
@@ -54,19 +54,24 @@
                 </tbody>
             </table>
         </div>
+        <div exclude-if="Model.Emails.Any()">
+            <partial name="_EmptyTablePlaceholder" />
+        </div>
     </div>
-
-    <div class="card-footer clearfix">
-        @Html.PagedListPager(Model.Emails, page => Url.Action("Paginate", "Folder",new { page = page, 
-           folderId = Model.FolderId, 
-           targetUpdate = Model.TargetUpdate, 
-           emailPriority = Model.EmailPriority, 
-           searchTerm = Model.SearchTerm }),
+    <div include-if="@Model.Emails.Any()" class="card-footer clearfix">
+        @Html.PagedListPager(Model.Emails, page => Url.Action("Paginate", "Folder", new
+        {
+            page = page,
+           folderId = Model.FolderId,
+           targetUpdate = Model.TargetUpdate,
+           emailPriority = Model.EmailPriority,
+           searchTerm = Model.SearchTerm
+        }),
          PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
          {
              LiElementClasses = new string[] { "page-item" },
              PageClasses = new string[] { "page-link" },
-             
+
          }, new AjaxOptions
          {
              HttpMethod = "GET",
