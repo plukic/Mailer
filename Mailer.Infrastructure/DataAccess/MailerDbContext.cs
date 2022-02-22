@@ -1,4 +1,5 @@
 ﻿using Mailer.Core.Domain.Emails;
+using Mailer.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,8 +24,9 @@ namespace Mailer.Infrastructure.DataAccess
 
             builder.ApplyConfigurationsFromAssembly(typeof(MailerDbContext).Assembly);
 
-            // Apply global filters in one place
-            //builder.SetQueryFilterOnAllEntities<ISoftDeletableEntity>(b => !b.IsDeleted);
+            // Apply global filters in one place 
+            //ie. Inject ICurrentUser  to DbContext and apply globar query to filter only current logged in users email
+            //builder.SetQueryFilterOnAllEntities<QueuedEmail>(b => b.From == _currentUser.Email);
         }
     }
 }
