@@ -1,6 +1,8 @@
 ﻿@using Mailer.Web.Components
-@using Mailer.Core.Domain.Emails
 @using Humanizer
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+
 @model FolderMessagesViewModel
 
 
@@ -8,9 +10,10 @@
     <div class="card-header">
         <h3 class="card-title col-md-4">@Model.FolderName</h3>
         <div class="card-tools col-md-8">
-            <form asp-action="Search" asp-controller="Folder" ajax="true" ajax-update="@Model.TargetUpdate" 
-                  asp-route-folderId="@Model.FolderId" asp-route-targetUpdate="@Model.TargetUpdate">
-
+            <form asp-action="Search" asp-controller="Folder" ajax="true"
+                  ajax-update="@Model.TargetUpdate"
+                  asp-route-folderId="@Model.FolderId"
+                  asp-route-targetUpdate="@Model.TargetUpdate">
                 <div class="row">
                     <div class="form-group col-md-4">
                         <select asp-for="@Model.EmailPriority" class="form-control" asp-items="@Model.EmailPriorities"></select>
@@ -51,5 +54,24 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div class="card-footer clearfix">
+        @Html.PagedListPager(Model.Emails, page => Url.Action("Paginate", "Folder",new { page = page, 
+           folderId = Model.FolderId, 
+           targetUpdate = Model.TargetUpdate, 
+           emailPriority = Model.EmailPriority, 
+           searchTerm = Model.SearchTerm }),
+         PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+         {
+             LiElementClasses = new string[] { "page-item" },
+             PageClasses = new string[] { "page-link" },
+             
+         }, new AjaxOptions
+         {
+             HttpMethod = "GET",
+             UpdateTargetId = "folderUpdateTarget"
+         })
+        )
     </div>
 </div>

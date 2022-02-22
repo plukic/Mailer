@@ -14,7 +14,7 @@ namespace Mailer.Web.Services.ExternalLogin
             string uniqueId = ctx.Principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
             //for demo lets say that nickname is both email and username
-            string email = ctx.Principal.Claims.FirstOrDefault(x => x.Type == "nickname")?.Value;
+            string email = ctx.Principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
             string fullName = ctx.Principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.GivenName)?.Value + " " +
                 ctx.Principal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Surname)?.Value;
 

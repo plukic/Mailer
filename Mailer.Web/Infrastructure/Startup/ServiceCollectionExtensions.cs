@@ -136,6 +136,8 @@ namespace Mailer.Web.Infrastructure.Startup
 
             services.AddAuth0WebAppAuthentication(options =>
             {
+
+                options.Scope = "openid profile email";
                 options.Domain = configuration["Auth0:Domain"];
                 options.ClientId = configuration["Auth0:ClientId"];
 

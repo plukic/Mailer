@@ -30,10 +30,26 @@ namespace Mailer.Web.Controllers
                 folderId = folderId,
                 emailPriority = model.EmailPriority,
                 searchTerm = model.SearchTerm,
-                targetUpdate = targetUpdate
+                targetUpdate = targetUpdate,
+                page = 1 //reset to first page
             });
         }
 
-
+        [HttpGet]
+        public IActionResult Paginate(FolderType folderId,
+            string targetUpdate,
+            EmailPriority? emailPriority = null,
+            string searchTerm = null,
+            int page = 1)
+        {
+            return ViewComponent(nameof(FolderMessages), new
+            {
+                folderId = folderId,
+                emailPriority = emailPriority,
+                searchTerm = searchTerm,
+                targetUpdate = targetUpdate,
+                page = page
+            });
+        }
     }
 }

@@ -4,6 +4,7 @@ using Mailer.Core.Domain.Folders;
 using Mailer.Core.Localization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using X.PagedList;
 
 namespace Mailer.Web.Components
 {
@@ -24,7 +25,7 @@ namespace Mailer.Web.Components
 
 
         #region Search result
-        public List<EmailDto> Emails { get; set; }
+        public StaticPagedList<EmailDto> Emails { get; set; }
         #endregion
 
     }

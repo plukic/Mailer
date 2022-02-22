@@ -32,6 +32,7 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 	<PackageReference Include="Auth0.AspNetCore.Authentication" Version="1.0.0" />
+	<PackageReference Include="X.PagedList.Mvc.Core" Version="8.1.0" />
 
   </ItemGroup>
 

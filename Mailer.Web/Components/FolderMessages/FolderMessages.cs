@@ -25,7 +25,8 @@ namespace Mailer.Web.Components
             FolderType folderId,
             string targetUpdate = null,
             string searchTerm = null,
-            EmailPriority? emailPriority = null)
+            EmailPriority? emailPriority = null,
+            int page=1)
         {
             var model = new FolderMessagesViewModel();
             model.FolderId = folderId;
@@ -42,7 +43,7 @@ namespace Mailer.Web.Components
             {
                 Text = _localizer[LocalizationKeys.All]
             });
-            var result = await _mediator.Send(new GetEmailsPerFolderIdRequest(folderId, emailPriority, searchTerm));
+            var result = await _mediator.Send(new GetEmailsPerFolderIdRequest(folderId, emailPriority, searchTerm, page));
             model.Emails = result;
             return View(model);
         }
