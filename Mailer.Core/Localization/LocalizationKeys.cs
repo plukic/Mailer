@@ -24,7 +24,12 @@ namespace Mailer.Core.Localization
 
         public const string EmailSavedAsDraftSuccessfully = nameof(EmailSavedAsDraftSuccessfully);
         public const string ErrorWhileSavingEmailAsDraft = nameof(ErrorWhileSavingEmailAsDraft);
-
+        public const string MoveToTrash = nameof(MoveToTrash);
+        public const string DeleteConfirmationMessage = nameof(DeleteConfirmationMessage);
+        public const string Delete = nameof(Delete);
+        public const string DeleteMail = nameof(DeleteMail);
+        public const string ErrorWhileDeletingEmail = nameof(ErrorWhileDeletingEmail);
+        public const string EmailDeletedSuccessfully = nameof(EmailDeletedSuccessfully);
 
     }
 }

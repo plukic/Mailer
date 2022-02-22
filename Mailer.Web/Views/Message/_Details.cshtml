@@ -42,10 +42,11 @@
                 <textarea asp-for="Body" rows="5" cols="40" disabled></textarea>
             </div>
         </div>
-
     </div>
     <div class="card-footer ">
-        <button></button>
+        <div include-if="@Model.FolderId==Mailer.Core.Domain.Folders.FolderType.Sent" class="pull-right">
+            <a modal-toggle="true" asp-controller="Message" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger"><i class="fa fa-envelope-o"></i> @Localizer[LocalizationKeys.MoveToTrash]</a>
+        </div>
     </div>
 </div>
 

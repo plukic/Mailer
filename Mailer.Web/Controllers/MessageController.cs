@@ -1,6 +1,7 @@
 ﻿using Mailer.Core.Domain.Emails.Requests;
 using Mailer.Core.Localization;
 using Mailer.Web.Infrastructure.UI.Alerts;
+using Mailer.Web.Models.Base;
 using Mailer.Web.Models.Message;
 using Mailer.Web.Services.Email;
 using MediatR;
@@ -26,6 +27,25 @@ namespace Mailer.Web.Controllers
             _localizer = localizer;
         }
 
+
+
+        public async Task<IActionResult> Details(int emailId, string targetUpdate = null)
+        {
+            var emailResult = await _mediator.Send(new GetEmailByIdRequest(emailId));
+            if (!emailResult.IsSuccess)
+            {
+                _alertManager.AddError(_localizer[LocalizationKeys.EmailNotFound]);
+                return AjaxRedirectToAction("Index", "Home");
+            }
+
+            var model = _emailViewModelService.PrepareMessageComposeModel(emailResult.Value);
+            model.TargetUpdate = targetUpdate;
+
+            if (emailResult.Value.FolderId == Core.Domain.Folders.FolderType.Drafts)
+                return PartialView("_Compose", model);
+            else
+                return PartialView("_Details", model);
+        }
         public async Task<IActionResult> Compose(string targetUpdate = null, int? draftEmailId = null)
         {
             var modelResult = await _emailViewModelService.PrepareMessageComposeModel(draftEmailId);
@@ -38,24 +58,6 @@ namespace Mailer.Web.Controllers
             return PartialView("_Compose", modelResult.Value);
         }
 
-        public async Task<IActionResult> Details(int emailId, string targetUpdate = null)
-        {
-            var emailResult = await _mediator.Send(new GetEmailByIdRequest(emailId));
-            if (!emailResult.IsSuccess)
-            {
-                _alertManager.AddSuccess(_localizer[LocalizationKeys.EmailNotFound]);
-                return AjaxRedirectToAction("Index", "Home");
-            }
-
-            var model = _emailViewModelService.PrepareMessageComposeModel(emailResult.Value);
-            model.TargetUpdate = targetUpdate;
-
-            if (emailResult.Value.FolderId == Core.Domain.Folders.FolderType.Drafts)
-                return PartialView("_Compose", model);
-            else
-                return PartialView("_Details", model);
-        }
-        
         [HttpPost]
         public async Task<IActionResult> Compose(MessageComposeViewModel model, string targetUpdate = null, int? draftEmailId = null)
         {
@@ -70,7 +72,7 @@ namespace Mailer.Web.Controllers
             if (sendMailResponse.IsSuccess)
                 _alertManager.AddSuccess(_localizer[LocalizationKeys.EmailSentSuccessfully]);
             else
-                _alertManager.AddSuccess(_localizer[LocalizationKeys.ErrorWhileSendingEmail]);
+                _alertManager.AddError(_localizer[LocalizationKeys.ErrorWhileSendingEmail]);
 
             return AjaxRedirectToAction("Index", "Home");
         }
@@ -89,9 +91,33 @@ namespace Mailer.Web.Controllers
             if (sendMailResponse.IsSuccess)
                 _alertManager.AddSuccess(_localizer[LocalizationKeys.EmailSavedAsDraftSuccessfully]);
             else
-                _alertManager.AddSuccess(_localizer[LocalizationKeys.ErrorWhileSavingEmailAsDraft]);
+                _alertManager.AddError(_localizer[LocalizationKeys.ErrorWhileSavingEmailAsDraft]);
 
             return AjaxRedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return PartialView("_Delete", new BaseDeleteModel<int>
+            {
+                Id = id
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, BaseDeleteModel<int> model)
+        {
+
+            var deleteEmailResponse = await _mediator.Send(new MoveEmailToTrashRequest(model.Id));
+            if (deleteEmailResponse.IsSuccess)
+                _alertManager.AddSuccess(_localizer[LocalizationKeys.EmailDeletedSuccessfully]);
+            else
+                _alertManager.AddError(_localizer[LocalizationKeys.ErrorWhileDeletingEmail]);
+            return AjaxRedirectToAction("Index", "Home");
+        }
+
+
+
     }
 }

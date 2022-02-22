@@ -52,6 +52,7 @@ namespace Mailer.Web.Services.Email
                 model.Subject = draftEmail.Subject;
                 model.Body = draftEmail.Body;
                 model.EmailPriority = draftEmail.EmailPriority;
+                model.FolderId = draftEmail.FolderId;
             }
 
             model.EmailPriorities = PopulateEmailPriorities();
@@ -74,6 +75,7 @@ namespace Mailer.Web.Services.Email
             model.Subject = email.Subject;
             model.Body = email.Body;
             model.EmailPriority = email.EmailPriority;
+            model.FolderId=email.FolderId;
             return model;
         }
 

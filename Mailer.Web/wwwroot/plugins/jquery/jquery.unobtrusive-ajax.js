@@ -68,6 +68,7 @@
         var mode;
         var contentType = xhr.getResponseHeader("Content-Type") || "text/html";
 
+        console.log("Opa dosao success");
         if (contentType.indexOf("application/x-javascript") !== -1) {  // jQuery already executes JavaScript for us
             return;
         }

@@ -1,0 +1,23 @@
+﻿@model Mailer.Web.Models.Base.BaseDeleteModel<int>
+
+<div id="modal-block">
+    <form asp-action="Delete" asp-route-id="@Model.Id" asp-controller="Message" method="post" ajax="true" ajax-update="modal-block">
+        <div class="modal-header">
+            <input asp-for="@Model.Id" type="hidden"/>
+            <h5 class="text-semi-bold-32" id="exampleModalLabel">@Localizer[LocalizationKeys.DeleteMail]</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+           <p >
+               @Localizer[LocalizationKeys.DeleteConfirmationMessage]
+               
+           </p>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">@Localizer[LocalizationKeys.Delete]</button>
+        </div>
+    </form>
+</div>
+

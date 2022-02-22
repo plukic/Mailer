@@ -81,3 +81,24 @@ msgid "FolderTypeDrafts"
 msgstr "Drafts"
 msgid "FolderTypeTrash"
 msgstr "Trash"
+
+
+msgid "DeleteConfirmationMessage"
+msgstr "Are you sure you want to delete this record?"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "DeleteMail"
+msgstr "Delete mail"
+
+
+msgid "ErrorWhileDeletingEmail"
+msgstr "Error while deleting email"
+
+
+msgid "EmailDeletedSuccessfully"
+msgstr "Email deleted successfully"
+
+msgid "MoveToTrash"
+msgstr "Move to trash"

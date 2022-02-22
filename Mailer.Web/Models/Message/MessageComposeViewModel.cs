@@ -1,4 +1,5 @@
 ﻿using Mailer.Core.Domain.Emails;
+using Mailer.Core.Domain.Folders;
 using Mailer.Core.Localization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
@@ -19,6 +20,7 @@ namespace Mailer.Web.Models.Message
         public string Body { get; set; }
         [Display(Name = LocalizationKeys.EmailPriority)]
         public EmailPriority EmailPriority { get; set; }
+        public FolderType FolderId { get; set; }
         public IList<SelectListItem> EmailPriorities { get; set; }
 
         public string TargetUpdate { get; set; }
