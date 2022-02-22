@@ -10,7 +10,7 @@
     <input asp-for="@Model.Id" class="form-control" type="hidden" />
     <div class="card">
         <div class="card-header with-border">
-            <h3 class="card-title">Compose New Message</h3>
+            <h3 class="card-title">@Localizer[LocalizationKeys.NewMessage]</h3>
         </div>
         <div class="card-body">
             <div class="form-group row">
@@ -68,10 +68,10 @@
 
         </div>
         <div class="card-footer ">
-            <button type="reset" class="btn btn-danger"><i class="fa fa-times"></i> Discard</button>
+            <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info"><i class="fa fa-times"></i> @Localizer[LocalizationKeys.Discard]</a>
             <div class="pull-right">
-                <button type="submit" asp-action="SaveAsDraft" class="btn btn-default" ><i class="fa fa-save"></i> Draft</button>
-                <button type="submit" asp-action="Compose" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
+                <button type="submit" asp-action="SaveAsDraft" class="btn btn-default" ><i class="fa fa-save"></i> @Localizer[LocalizationKeys.SaveAsDraft]</button>
+                <button type="submit" asp-action="Compose" class="btn btn-primary"><i class="fa fa-envelope-o"></i> @Localizer[LocalizationKeys.Send]</button>
             </div>
         </div>
     </div>
@@ -82,7 +82,6 @@
         $('#@Html.IdFor(x=>x.Body)').summernote({
             height: 200
         });
-
         $("#@Html.IdFor(x=>x.To)").select2({ tags: true, tokenSeparators: [',', ' '] });
         $("#@Html.IdFor(x=>x.Cc)").select2({ tags: true, tokenSeparators: [',', ' '] });
         $("#@Html.IdFor(x=>x.Bcc)").select2({ tags: true, tokenSeparators: [',', ' ']  });

@@ -104,3 +104,18 @@ msgid "MoveToTrash"
 msgstr "Move to trash"
 msgid "SearchByEmail"
 msgstr "Search by email"
+
+
+msgid "NewMessage"
+msgstr "New Message"
+
+
+msgid "Compose"
+msgstr "Compose"
+
+msgid "SaveAsDraft"
+msgstr "Save as draft"
+
+
+msgid "Send"
+msgstr "Send"

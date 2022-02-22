@@ -33,6 +33,12 @@ namespace Mailer.Core.Localization
         public const string All = nameof(All);
         public const string Search = nameof(Search);
         public const string SearchByEmail = nameof(SearchByEmail);
+        public const string NewMessage = nameof(NewMessage);
+        public const string Compose = nameof(Compose);
+        public const string SaveAsDraft = nameof(SaveAsDraft);
+        public const string Send = nameof(Send);
+        public const string Discard = nameof(Discard);
+        public const string Folders = nameof(Folders);
 
     }
 }

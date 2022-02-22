@@ -8,7 +8,8 @@
     <div class="card-header">
         <h3 class="card-title col-md-4">@Model.FolderName</h3>
         <div class="card-tools col-md-8">
-            <form asp-action="Search" asp-controller="Folder" ajax="true" ajax-update="@Model.TargetUpdate" asp-route-folderId="@Model.FolderId" asp-route-targetUpdate="@Model.TargetUpdate">
+            <form asp-action="Search" asp-controller="Folder" ajax="true" ajax-update="@Model.TargetUpdate" 
+                  asp-route-folderId="@Model.FolderId" asp-route-targetUpdate="@Model.TargetUpdate">
 
                 <div class="row">
                     <div class="form-group col-md-4">
