@@ -1,6 +1,7 @@
 using Auth0.AspNetCore.Authentication;
 using FluentValidation.AspNetCore;
 using Mailer.Web.Configuration;
+using Mailer.Web.Hubs;
 using Mailer.Web.Infrastructure.Startup;
 using Mailer.Web.Models.Message.Validators;
 using MediatR;
@@ -44,6 +45,9 @@ builder.Services.AddMediatR(typeof(Program), typeof(Mailer.Infrastructure.Assemb
 #region Automapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly, typeof(Mailer.Core.AssemblyTarget).Assembly);
 #endregion
+#region SignalR
+builder.Services.AddSignalR();
+#endregion
 
 #region Application services 
 builder.Services.AddApplicationServices()
@@ -80,5 +84,9 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapHub<EmailHub>("/emailHub");
+
+
 app.Run();
 #endregion
+

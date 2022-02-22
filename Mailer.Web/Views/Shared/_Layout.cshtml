@@ -17,6 +17,8 @@
     <partial name="_Styles" />
 
     @await RenderSectionAsync("Styles", required: false)
+    <partial name="_Scripts" />
+
 </head>
 <body class="sidebar-mini">
     <div class="wrapper">
@@ -48,7 +50,6 @@
         </section>
     </div>
     </div>
-    <partial name="_Scripts" />
     <partial name="_ModalContainer" />
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -3,6 +3,7 @@ using AutoMapper;
 using Mailer.Core.Configuration;
 using Mailer.Core.Data;
 using Mailer.Core.Domain.Emails.Dtos;
+using Mailer.Core.Domain.Emails.Notifications;
 using Mailer.Core.Domain.Emails.Requests;
 using Mailer.Core.Domain.Emails.Specifications;
 using Mailer.Core.Security.Users;
@@ -45,6 +46,10 @@ namespace Mailer.Core.Domain.Emails.Handlers
                 result = await CreateNewDraftMail(data);
             }
 
+            if (result.IsSuccess)
+            {
+                await _mediator.Publish(new RefreshFolderNumbersNotification());
+            }
             return result;
         }
 

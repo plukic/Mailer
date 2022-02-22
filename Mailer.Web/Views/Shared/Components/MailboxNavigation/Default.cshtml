@@ -22,7 +22,7 @@
         <ul class="nav nav-pills flex-column">
 
             <li class="nav-item">
-                <a asp-action="Index" asp-controller="Folder" 
+                <a asp-action="Index" asp-controller="Folder"
                    asp-route-folderId="@Model.SentFolder.FolderId"
                    asp-route-targetUpdate="@Model.DataTargetUpdate"
                    data-ajax="true"
@@ -30,7 +30,7 @@
                    data-ajax-method="get" class="nav-link">
                     <i class="far fa-envelope"></i>
                     @Localizer[Mailer.Core.Domain.Folders.FolderType.Sent.ToLocalizationKey()]
-                    <span include-if="@Model.SentFolder.MessagesCount>0" class="badge bg-primary float-right">@Model.SentFolder.MessagesCount</span>
+                    <span data-target-sent class="badge bg-primary float-right">@Model.SentFolder.MessagesCount</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -43,21 +43,49 @@
                     <i class="far fa-file-alt"></i>
                     @Localizer[Mailer.Core.Domain.Folders.FolderType.Drafts.ToLocalizationKey()]
 
-                    <span include-if="@Model.DraftsFolder.MessagesCount>0" class="badge bg-secondary float-right">@Model.DraftsFolder.MessagesCount</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a asp-action="Index" asp-controller="Folder" asp-route-folderId="@Model.TrashFolder.FolderId"
-                   data-ajax="true"
-                   data-ajax-update="@Model.DataTargetUpdate"
-                   asp-route-targetUpdate="@Model.DataTargetUpdate"
-                   data-ajax-method="get"
-                   class="nav-link">
-                    <i class="far fa-trash-alt"></i>
-                    @Localizer[Mailer.Core.Domain.Folders.FolderType.Trash.ToLocalizationKey()]
-                    <span include-if="@Model.TrashFolder.MessagesCount>0" class="badge bg-danger float-right">@Model.TrashFolder.MessagesCount</span>
-                </a>
-            </li>
-        </ul>
+                    <span class="badge bg-secondary float-right"
+                          data-target-drafts>@Model.DraftsFolder.MessagesCount</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="Index" asp-controller="Folder" asp-route-folderId="@Model.TrashFolder.FolderId"
+                       data-ajax="true"
+                       data-ajax-update="@Model.DataTargetUpdate"
+                       asp-route-targetUpdate="@Model.DataTargetUpdate"
+                       data-ajax-method="get"
+                       class="nav-link">
+                        <i class="far fa-trash-alt"></i>
+                        @Localizer[Mailer.Core.Domain.Folders.FolderType.Trash.ToLocalizationKey()]
+                        <span data-target-trash class="badge bg-danger float-right">@Model.TrashFolder.MessagesCount</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
+    <script>
+        function startMailboxNavigationUpdateSignalR() {
+            var sentNumberTarget = $("[data-target-sent]");
+            var draftsNumberTarget = $("[data-target-drafts]");
+            var trashNumberTarget = $("[data-target-trash]");
+
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("/emailhub")
+                .withAutomaticReconnect([0, 2, 5, 15, 60])
+                .build();
+
+            connection.on("RefreshSent", function (data) {
+                sentNumberTarget.html(data);
+            });
+            connection.on("RefreshDraft", function (data) {
+                draftsNumberTarget.html(data);
+            });
+
+            connection.on("RefreshTrash", function (data) {
+                trashNumberTarget.html(data);
+            });
+            connection.start();
+        }
+        $(document).ready(function () {
+            startMailboxNavigationUpdateSignalR();
+        });
+    </script>

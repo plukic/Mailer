@@ -10,7 +10,7 @@
     <div class="card-header">
         <h3 class="card-title col-md-4">@Model.FolderName</h3>
         <div class="card-tools col-md-8">
-            <form asp-action="Search" asp-controller="Folder" ajax="true"
+            <form id="folderSearchForm" asp-action="Search" asp-controller="Folder" ajax="true"
                   ajax-update="@Model.TargetUpdate"
                   asp-route-folderId="@Model.FolderId"
                   asp-route-targetUpdate="@Model.TargetUpdate">
@@ -80,3 +80,32 @@
         )
     </div>
 </div>
+
+
+<script>
+    function startFolderMessagesUpdateSignalR() {
+        var form = $("#folderSearchForm");
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/emailhub")
+            .withAutomaticReconnect([0, 2, 5, 15, 60])
+            .build();
+        connection.on("RefreshSent", function (data) {
+            form.submit();
+        });
+        connection.on("RefreshDraft", function (data) {
+            form.submit();
+        });
+
+        connection.on("RefreshTrash", function (data) {
+            form.submit();
+        });
+
+        connection.start();
+    }
+
+
+
+    $(document).ready(function () {
+        startFolderMessagesUpdateSignalR();
+    });
+</script>

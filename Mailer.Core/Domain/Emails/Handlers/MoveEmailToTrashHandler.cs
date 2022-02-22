@@ -2,6 +2,7 @@
 using AutoMapper;
 using Mailer.Core.Data;
 using Mailer.Core.Domain.Emails.Dtos;
+using Mailer.Core.Domain.Emails.Notifications;
 using Mailer.Core.Domain.Emails.Requests;
 using Mailer.Core.Domain.Emails.Specifications;
 using Mailer.Core.Security.Users;
@@ -18,13 +19,15 @@ namespace Mailer.Core.Domain.Emails.Handlers
     {
         private IRepository<QueuedEmail> _repository;
         private IMapper _mapper;
+        private IMediator _mediator;
         private ICurrentUser _currentUser;
 
-        public MoveEmailToTrashHandler(IRepository<QueuedEmail> repository, IMapper mapper, ICurrentUser currentUser)
+        public MoveEmailToTrashHandler(IRepository<QueuedEmail> repository, IMapper mapper, ICurrentUser currentUser, IMediator mediator)
         {
             _repository = repository;
             _mapper = mapper;
             _currentUser = currentUser;
+            _mediator = mediator;
         }
         public async Task<Result<EmailDto>> Handle(MoveEmailToTrashRequest request, CancellationToken cancellationToken)
         {
@@ -37,6 +40,7 @@ namespace Mailer.Core.Domain.Emails.Handlers
             await _repository.UpdateAsync(entity);
             await _repository.SaveChangesAsync();
 
+            await _mediator.Publish(new RefreshFolderNumbersNotification());
             return Result<EmailDto>.Success(_mapper.Map<EmailDto>(entity));
         }
     }

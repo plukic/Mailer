@@ -1,5 +1,8 @@
 ﻿using Mailer.Core.Domain.Emails.Requests;
 using Mailer.Core.Localization;
+using Mailer.Core.Security.Users;
+using Mailer.Web.HubClients;
+using Mailer.Web.Hubs;
 using Mailer.Web.Infrastructure.UI.Alerts;
 using Mailer.Web.Models.Base;
 using Mailer.Web.Models.Message;
@@ -7,6 +10,7 @@ using Mailer.Web.Services.Email;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Localization;
 
 namespace Mailer.Web.Controllers
@@ -19,7 +23,8 @@ namespace Mailer.Web.Controllers
         private readonly IAlertManager _alertManager;
         private readonly IStringLocalizer<MessageController> _localizer;
 
-        public MessageController(IMediator mediator, IEmailViewModelService emailViewModelService, IAlertManager alertManager, IStringLocalizer<MessageController> localizer)
+        public MessageController(IMediator mediator, IEmailViewModelService emailViewModelService, IAlertManager alertManager,
+            IStringLocalizer<MessageController> localizer)
         {
             _mediator = mediator;
             _emailViewModelService = emailViewModelService;
@@ -48,6 +53,7 @@ namespace Mailer.Web.Controllers
         }
         public async Task<IActionResult> Compose(string targetUpdate = null, int? draftEmailId = null)
         {
+
             var modelResult = await _emailViewModelService.PrepareMessageComposeModel(draftEmailId);
             if (!modelResult.IsSuccess)
             {
