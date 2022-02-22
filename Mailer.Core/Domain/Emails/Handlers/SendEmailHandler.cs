@@ -92,6 +92,9 @@ namespace Mailer.Core.Domain.Emails.Handlers
 
             await _repository.UpdateAsync(draftEmail);
             await _repository.SaveChangesAsync();
+
+
+            await _mediator.Publish(new CloseDraftMailNotification(draftEmail.Id));
             return Result<EmailDto>.Success(_mapper.Map<EmailDto>(draftEmail));
 
         }

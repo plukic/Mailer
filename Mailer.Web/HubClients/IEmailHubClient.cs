@@ -5,5 +5,6 @@
         Task RefreshDraft(int count);
         Task RefreshTrash(int count);
         Task RefreshSent(int count);
+        Task CloseDraft();
     }
 }

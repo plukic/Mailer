@@ -4,7 +4,7 @@
 <form method="post"
       ajax="true"
       asp-route-targetUpdate="@Model.TargetUpdate"
-      asp-route-draftEmailId="@Model.Id" 
+      asp-route-draftEmailId="@Model.Id"
       asp-controller="Message"
       data-ajax-update="@Model.TargetUpdate">
     <input asp-for="@Model.Id" class="form-control" type="hidden" />
@@ -70,7 +70,7 @@
         <div class="card-footer ">
             <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info"><i class="fa fa-times"></i> @Localizer[LocalizationKeys.Discard]</a>
             <div class="pull-right">
-                <button type="submit" asp-action="SaveAsDraft" class="btn btn-default" ><i class="fa fa-save"></i> @Localizer[LocalizationKeys.SaveAsDraft]</button>
+                <button type="submit" asp-action="SaveAsDraft" class="btn btn-default"><i class="fa fa-save"></i> @Localizer[LocalizationKeys.SaveAsDraft]</button>
                 <button type="submit" asp-action="Compose" class="btn btn-primary"><i class="fa fa-envelope-o"></i> @Localizer[LocalizationKeys.Send]</button>
             </div>
         </div>
@@ -87,5 +87,25 @@
         $("#@Html.IdFor(x=>x.Bcc)").select2({ tags: true, tokenSeparators: [',', ' ']  });
         $("#@Html.IdFor(x=>x.EmailPriority)").select2({});
 
+    });
+</script>
+
+<script include-if="@Model.Id.HasValue">
+    function startCloseDraftMessagesSignalR() {
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/emailhub")
+            .withAutomaticReconnect([0, 2, 5, 15, 60])
+            .build();
+
+        connection.on("CloseDraft", function () {
+            window.location.href ='@Url.Action("Index","Home")';
+        });
+        connection.start().then(function () {
+            connection.invoke("JoinCloseDraftGroup",@Model.Id.Value);
+        });
+    }
+
+    $(document).ready(function () {
+       startCloseDraftMessagesSignalR()
     });
 </script>
