@@ -22,7 +22,8 @@ namespace Mailer.Core.Domain.Emails.Dtos
         public EmailPriority EmailPriority { get; set; }
         public string Body { get; set; }
         public DateTime CreatedOnUtc { get; set; }
-        public DateTime SentOnUtc { get; set; }
         public FolderType FolderId { get; set; }
+        public string BodyStriped { get; set; }
+        public DateTime? SentOnUtc { get; set; }
     }
 }

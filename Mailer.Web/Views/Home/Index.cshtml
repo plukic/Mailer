@@ -9,6 +9,6 @@
         @(await Component.InvokeAsync<Mailer.Web.Components.MailboxNavigation>(new { targetUpdate = "#folderUpdateTarget" }))
     </div>
     <div class="col-md-9" id="folderUpdateTarget">
-        @(await Component.InvokeAsync<Mailer.Web.Components.FolderMessages>(new { folderId = FolderType.Sent }) )
+        @(await Component.InvokeAsync<Mailer.Web.Components.FolderMessages>(new { folderId = FolderType.Sent, targetUpdate="#folderUpdateTarget" }) )
     </div>
 </div>

@@ -37,6 +37,25 @@ namespace Mailer.Web.Controllers
             modelResult.Value.TargetUpdate = targetUpdate;
             return PartialView("_Compose", modelResult.Value);
         }
+
+        public async Task<IActionResult> Details(int emailId, string targetUpdate = null)
+        {
+            var emailResult = await _mediator.Send(new GetEmailByIdRequest(emailId));
+            if (!emailResult.IsSuccess)
+            {
+                _alertManager.AddSuccess(_localizer[LocalizationKeys.EmailNotFound]);
+                return AjaxRedirectToAction("Index", "Home");
+            }
+
+            var model = _emailViewModelService.PrepareMessageComposeModel(emailResult.Value);
+            model.TargetUpdate = targetUpdate;
+
+            if (emailResult.Value.FolderId == Core.Domain.Folders.FolderType.Drafts)
+                return PartialView("_Compose", model);
+            else
+                return PartialView("_Details", model);
+        }
+        
         [HttpPost]
         public async Task<IActionResult> Compose(MessageComposeViewModel model, string targetUpdate = null, int? draftEmailId = null)
         {

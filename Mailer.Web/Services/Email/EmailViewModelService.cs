@@ -1,4 +1,5 @@
-﻿using Ardalis.Result;
+﻿using Ardalis.GuardClauses;
+using Ardalis.Result;
 using Mailer.Core.Domain.Emails;
 using Mailer.Core.Domain.Emails.Dtos;
 using Mailer.Core.Domain.Emails.Requests;
@@ -54,6 +55,25 @@ namespace Mailer.Web.Services.Email
             }
 
             model.EmailPriorities = PopulateEmailPriorities();
+            return model;
+        }
+
+        public MessageComposeViewModel PrepareMessageComposeModel(EmailDto email)
+        {
+            Guard.Against.Null(email);
+            var model = new MessageComposeViewModel();
+            model.Id = email.Id;
+
+            if (email.To.IsNotNullOrEmpty())
+                model.To = email.To.Split(",").ToList();
+            if (email.Cc.IsNotNullOrEmpty())
+                model.Cc = email.Cc.Split(",").ToList();
+            if (email.Bcc.IsNotNullOrEmpty())
+                model.Bcc = email.Bcc.Split(",").ToList();
+
+            model.Subject = email.Subject;
+            model.Body = email.Body;
+            model.EmailPriority = email.EmailPriority;
             return model;
         }
 

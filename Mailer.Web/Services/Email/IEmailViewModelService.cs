@@ -7,7 +7,8 @@ namespace Mailer.Web.Services.Email
 {
     public interface IEmailViewModelService
     {
-       Task<Result<MessageComposeViewModel>>PrepareMessageComposeModel(int? emailDraftId = null, MessageComposeViewModel model = null);
-        SendEmailDto PrepareSendMailRequest(int? draftEmailId,MessageComposeViewModel model);
+        Task<Result<MessageComposeViewModel>> PrepareMessageComposeModel(int? emailDraftId = null, MessageComposeViewModel model = null);
+        MessageComposeViewModel PrepareMessageComposeModel(EmailDto email);
+        SendEmailDto PrepareSendMailRequest(int? draftEmailId, MessageComposeViewModel model);
     }
 }

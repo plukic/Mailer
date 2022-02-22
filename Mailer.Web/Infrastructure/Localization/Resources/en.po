@@ -73,3 +73,11 @@ msgstr "Email has been successfully saved as draft."
 
 msgid "ErrorWhileSavingEmailAsDraft"
 msgstr "Error while saving email as draft."
+
+
+msgid "FolderTypeSent"
+msgstr "Sent"
+msgid "FolderTypeDrafts"
+msgstr "Drafts"
+msgid "FolderTypeTrash"
+msgstr "Trash"

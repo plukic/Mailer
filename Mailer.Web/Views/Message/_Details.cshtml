@@ -1,0 +1,65 @@
+﻿@using Mailer.Web.Models.Message
+@model MessageComposeViewModel
+
+
+<div class="card">
+    <div class="card-header with-border">
+        <h3 class="card-title">@Model.Subject</h3>
+    </div>
+    <div class="card-body">
+        <div class="form-group row">
+            <label asp-for="@Model.To" class="col-md-2 control-label text-right"></label>
+            <div class="col-md-10">
+                <select asp-for="@Model.To" asp-items="@Model.ToSelectList(Model.To)" class="form-control select2" disabled></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Cc" class="col-md-2 control-label text-right"></label>
+            <div class="col-md-10">
+                <select asp-for="@Model.Cc" asp-items="@Model.ToSelectList(Model.Cc)" class="form-control select2" disabled></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Bcc" class="col-md-2 control-label text-right"></label>
+            <div class="col-md-10">
+                <select asp-for="@Model.Bcc" asp-items="@Model.ToSelectList(Model.Bcc)" class="form-control select2" disabled></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Subject" class="col-md-2 control-label text-right"></label>
+            <div class="col-md-10">
+                <input asp-for="@Model.Subject" class="form-control" disabled />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.EmailPriority" class="col-md-2 control-label text-right"></label>
+            <div class="col-md-10">
+                <select asp-for="@Model.EmailPriority" asp-items="Model.EmailPriorities" class="form-control select2" disabled></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12">
+                <textarea asp-for="Body" rows="5" cols="40" disabled></textarea>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer ">
+        <button></button>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#@Html.IdFor(x=>x.Body)').summernote({
+            height: 200
+        });
+        $('#@Html.IdFor(x=>x.Body)').summernote("disable");
+
+        $("#@Html.IdFor(x=>x.To)").select2({ tags: true, tokenSeparators: [',', ' '] });
+        $("#@Html.IdFor(x=>x.Cc)").select2({ tags: true, tokenSeparators: [',', ' '] });
+        $("#@Html.IdFor(x=>x.Bcc)").select2({ tags: true, tokenSeparators: [',', ' ']  });
+        $("#@Html.IdFor(x=>x.EmailPriority)").select2({});
+
+    });
+</script>

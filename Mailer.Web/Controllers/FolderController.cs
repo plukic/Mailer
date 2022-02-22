@@ -16,9 +16,9 @@ namespace Mailer.Web.Controllers
         {
             _logger = logger;
         }
-        public IActionResult Index(FolderType folderId)
+        public IActionResult Index(FolderType folderId, string targetUpdate)
         {
-            return ViewComponent(nameof(FolderMessages), new { folderId= folderId});
+            return ViewComponent(nameof(FolderMessages), new { folderId= folderId, targetUpdate = targetUpdate });
         }
 
      

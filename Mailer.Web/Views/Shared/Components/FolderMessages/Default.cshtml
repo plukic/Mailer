@@ -21,13 +21,21 @@
                 <tbody>
                     @foreach (var item in Model.Emails)
                     {
-                    <tr>
-                        <td class="mailbox-name"><a href="read-mail.html">@item.ToName</a></td>
-                        <td class="mailbox-subject">
-                            <b>@item.Subject.Truncate(30)</b> - @item.Body.Truncate(100)
-                        </td>
-                        <td class="mailbox-date">@DateTimeConverter.ConvertToLocal(item.CreatedOnUtc).Humanize(false)</td>
-                    </tr>
+                        <tr>
+                            <td class="mailbox-name">
+                                <a asp-action="Details"
+                                   asp-controller="Message"
+                                   asp-route-emailId="@item.Id"
+                                   data-ajax="true"
+                                   data-ajax-update="@Model.TargetUpdate">
+                                    @item.ToName
+                                </a>
+                            </td>
+                            <td class="mailbox-subject">
+                                <b>@item.Subject.Truncate(30)</b> - @item.BodyStriped.Truncate(100)
+                            </td>
+                            <td class="mailbox-date">@DateTimeConverter.ConvertToLocal(item.CreatedOnUtc).Humanize(false)</td>
+                        </tr>
                     }
 
                 </tbody>
