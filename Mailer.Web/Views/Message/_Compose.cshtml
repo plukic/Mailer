@@ -101,11 +101,12 @@
             window.location.href ='@Url.Action("Index","Home")';
         });
         connection.start().then(function () {
-            connection.invoke("JoinCloseDraftGroup",@Model.Id.Value);
+            connection.invoke("JoinCloseDraftGroup",@Model.Id.Value).then(function () {
+            });
         });
     }
 
     $(document).ready(function () {
-       startCloseDraftMessagesSignalR()
+        startCloseDraftMessagesSignalR()
     });
 </script>
