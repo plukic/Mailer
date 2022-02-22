@@ -1,0 +1,80 @@
+﻿@font-face {
+    font-family: Mulish;
+    font-style:normal;
+    src: url(Mulish-Black.ttf);
+}
+
+@font-face {
+    font-family: MulishBold;
+    src: url(Mulish-Bold.ttf);
+}
+
+@font-face {
+    font-family: MulishBoldItalic;
+    src: url(Mulish-BoldItalic.ttf);
+}
+
+@font-face {
+    font-family: MulishExtraBold;
+    src: url(Mulish-ExtraBold.ttf);
+}
+
+@font-face {
+    font-family: MulishExtraBoldItalic;
+    src: url(Mulish-ExtraBoldItalic.ttf);
+}
+
+@font-face {
+    font-family: MulishExtraLight;
+    src: url(Mulish-ExtraLight.ttf);
+}
+
+@font-face {
+    font-family: MulishExtraLightItalic;
+    src: url(Mulish-ExtraLightItalic.ttf);
+}
+
+@font-face {
+    font-family: MulishItalic;
+    src: url(Mulish-Italic.ttf);
+}
+
+@font-face {
+    font-family: MulishLight;
+    src: url(Mulish-Light.ttf);
+}
+
+@font-face {
+    font-family: MulishBlackItalic;
+    src: url(Mulish-BlackItalic.ttf);
+}
+
+@font-face {
+    font-family: MulishLightItalic;
+    src: url(Mulish-LightItalic.ttf);
+}
+
+@font-face {
+    font-family: MulishMedium;
+    src: url(Mulish-Medium.ttf);
+}
+
+@font-face {
+    font-family: MulishMediumItalic;
+    src: url(Mulish-MediumItalic.ttf);
+}
+
+@font-face {
+    font-family: MulishRegular;
+    src: url(Mulish-Regular.ttf);
+}
+
+@font-face {
+    font-family: MulishSemiBold;
+    src: url(Mulish-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: MulishSemiBoldItalic;
+    src: url(Mulish-SemiBoldItalic.ttf);
+}

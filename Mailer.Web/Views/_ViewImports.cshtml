@@ -1,0 +1,12 @@
+﻿@using Mailer.Web
+@using Mailer.Web.Models
+@using Mailer.Web.Views.Shared
+@using Mailer.Core.Localization
+
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Mailer.Web
+
+@inject Mailer.Core.Configuration.MailerConfiguration MailerConfiguration
+@inject Mailer.Core.DateTimes.IDateTimeConverter DateTimeConverter
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer

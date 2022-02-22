@@ -1,0 +1,12 @@
+C:\GIT\Mailer\Mailer.SharedKernel\bin\Debug\net6.0\Mailer.SharedKernel.deps.json
+C:\GIT\Mailer\Mailer.SharedKernel\bin\Debug\net6.0\Mailer.SharedKernel.dll
+C:\GIT\Mailer\Mailer.SharedKernel\bin\Debug\net6.0\ref\Mailer.SharedKernel.dll
+C:\GIT\Mailer\Mailer.SharedKernel\bin\Debug\net6.0\Mailer.SharedKernel.pdb
+C:\GIT\Mailer\Mailer.SharedKernel\obj\Debug\net6.0\Mailer.SharedKernel.csproj.AssemblyReference.cache
+C:\GIT\Mailer\Mailer.SharedKernel\obj\Debug\net6.0\Mailer.SharedKernel.GeneratedMSBuildEditorConfig.editorconfig
+C:\GIT\Mailer\Mailer.SharedKernel\obj\Debug\net6.0\Mailer.SharedKernel.AssemblyInfoInputs.cache
+C:\GIT\Mailer\Mailer.SharedKernel\obj\Debug\net6.0\Mailer.SharedKernel.AssemblyInfo.cs
+C:\GIT\Mailer\Mailer.SharedKernel\obj\Debug\net6.0\Mailer.SharedKernel.csproj.CoreCompileInputs.cache
+C:\GIT\Mailer\Mailer.SharedKernel\obj\Debug\net6.0\Mailer.SharedKernel.dll
+C:\GIT\Mailer\Mailer.SharedKernel\obj\Debug\net6.0\ref\Mailer.SharedKernel.dll
+C:\GIT\Mailer\Mailer.SharedKernel\obj\Debug\net6.0\Mailer.SharedKernel.pdb

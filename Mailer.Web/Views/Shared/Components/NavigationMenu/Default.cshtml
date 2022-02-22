@@ -1,0 +1,43 @@
+﻿@using Mailer.Web.Components
+@model NavigationMenuViewModel
+@inject Mailer.Core.Security.Users.ICurrentUser CurrentUser
+@{
+    var localizedAppName = @Localizer[MailerConfiguration.GeneralSettings.ApplicationClientFacingName];
+}
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="#" class="brand-link">
+        <img src="https://eu.ui-avatars.com/api/?name=@localizedAppName" alt="@localizedAppName Logo" class="brand-image elevation-3">
+        <span class="brand-text font-weight-light">@localizedAppName</span>
+    </a>
+
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="https://eu.ui-avatars.com/api/?name=@CurrentUser.UserName" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">@CurrentUser.UserName</a>
+            </div>
+        </div>
+
+
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","Home")"  asp-controllers="Home" class="nav-link">
+                        <i class="fa fa-envelope nav-icon"></i>
+                        <p>@Localizer[LocalizationKeys.MailBox]</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Logout","Account")"  asp-controllers="Account" class="nav-link">
+                        <i class="fa fa-envelope nav-icon"></i>
+                        <p>@Localizer[LocalizationKeys.SignOut]</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+
+</aside>

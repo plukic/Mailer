@@ -1,0 +1,54 @@
+﻿
+@using Mailer.Web.Components
+@{
+    var currentTitle = ViewData.GetPageTitle();
+    var title = !string.IsNullOrEmpty(currentTitle) ? currentTitle + " / " : "";
+    title += MailerConfiguration.GeneralSettings.ApplicationName;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@title</title>
+
+    <partial name="_Favicons" />
+    <partial name="_Styles" />
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body class="sidebar-mini">
+    <div class="wrapper">
+        <partial name="_HeaderMenu" />
+        @(await Component.InvokeAsync<NavigationMenu>(new { ignoreDisplayInNavigationMenu = false }))
+    <div class="content-wrapper">
+
+
+        @(await Component.InvokeAsync<Alerts>(new { displayType = AlertDisplayType.Stacked }))
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>@currentTitle</h1>
+                    </div>
+                    @*<div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Inbox</li>
+                        </ol>
+                    </div>*@
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </section>
+    </div>
+    </div>
+    <partial name="_Scripts" />
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

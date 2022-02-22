@@ -1,0 +1,73 @@
+﻿/*.navbar-item-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar {
+    padding: 0;
+}
+
+.layout-navbar-fixed.layout-fixed .wrapper .sidebar {
+    margin-top: calc(5rem + 1px);
+}
+
+.sidebar-collapse.sidebar-mini .main-sidebar .nav-sidebar .nav-link, .sidebar-collapse.sidebar-mini-md .main-sidebar .nav-sidebar .nav-link, .sidebar-collapse.sidebar-mini-xs .main-sidebar .nav-sidebar .nav-link {
+    padding: 1rem;
+    font-size: 20px;
+}
+
+.main-sidebar {
+    background: #F5F8FA;
+    min-height: 100vh !important;
+    box-shadow: rgba(0, 0, 0,0.08) 5px 0 9px;
+}
+
+
+.sidebar {
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.mailbox-nav {
+    flex: 1;
+    margin-top:2rem;
+}
+
+.nav-link {
+    color: #333333;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    padding: 1rem;
+    justify-content: space-between;
+}
+
+    .nav-link span {
+        flex: 1;
+    }
+
+.nav-item-client {
+    flex: 1;
+    border-left: 6px solid #F5F8FA;
+}
+    .nav-item-client.active, .nav-item-client:hover {
+        background: white;
+        border-left: 6px solid #1FB5EB;
+        color: #333333;
+        font-weight: bold;
+    }
+        .nav-item-client.active i, .nav-item-client:hover i {
+            color: #1FB5EB;
+        }
+
+
+.nav-pills .nav-link:not(.active):hover {
+    color: #333333;
+    font-weight:bold;
+}
+
+
+*/

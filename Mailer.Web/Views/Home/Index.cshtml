@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using Mailer.Core.Domain.Folders
+
+
+<div class="row">
+    <div class="col-md-3">
+        @(await Component.InvokeAsync<Mailer.Web.Components.MailboxNavigation>(new { targetUpdate = "#folderUpdateTarget" }))
+    </div>
+    <div class="col-md-9" id="folderUpdateTarget">
+        @(await Component.InvokeAsync<Mailer.Web.Components.FolderMessages>(new { folderId = FolderType.Sent }) )
+    </div>
+</div>

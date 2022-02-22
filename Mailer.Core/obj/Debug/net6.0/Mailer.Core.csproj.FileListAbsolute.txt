@@ -1,0 +1,12 @@
+C:\GIT\Mailer\Mailer.Core\bin\Debug\net6.0\Mailer.Core.deps.json
+C:\GIT\Mailer\Mailer.Core\bin\Debug\net6.0\Mailer.Core.dll
+C:\GIT\Mailer\Mailer.Core\bin\Debug\net6.0\ref\Mailer.Core.dll
+C:\GIT\Mailer\Mailer.Core\bin\Debug\net6.0\Mailer.Core.pdb
+C:\GIT\Mailer\Mailer.Core\obj\Debug\net6.0\Mailer.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\GIT\Mailer\Mailer.Core\obj\Debug\net6.0\Mailer.Core.AssemblyInfoInputs.cache
+C:\GIT\Mailer\Mailer.Core\obj\Debug\net6.0\Mailer.Core.AssemblyInfo.cs
+C:\GIT\Mailer\Mailer.Core\obj\Debug\net6.0\Mailer.Core.csproj.CoreCompileInputs.cache
+C:\GIT\Mailer\Mailer.Core\obj\Debug\net6.0\Mailer.Core.dll
+C:\GIT\Mailer\Mailer.Core\obj\Debug\net6.0\ref\Mailer.Core.dll
+C:\GIT\Mailer\Mailer.Core\obj\Debug\net6.0\Mailer.Core.pdb
+C:\GIT\Mailer\Mailer.Core\obj\Debug\net6.0\Mailer.Core.csproj.AssemblyReference.cache

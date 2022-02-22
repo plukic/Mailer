@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "+4cLUK2zybgkWGLNg+CbRUKLNoKwiZgUtwL5WM9XLWk+LWvzCR3SvOb5TUEg/J0Psjb/N6aP3QzHCwRKEgfcVQ==",
+  "success": true,
+  "projectFilePath": "C:\\GIT\\Mailer\\Mailer.Core\\Mailer.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\plukic\\.nuget\\packages\\ardalis.result\\3.1.2\\ardalis.result.3.1.2.nupkg.sha512",
+    "C:\\Users\\plukic\\.nuget\\packages\\ardalis.specification\\6.0.1\\ardalis.specification.6.0.1.nupkg.sha512",
+    "C:\\Users\\plukic\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
+    "C:\\Users\\plukic\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
+    "C:\\Users\\plukic\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\plukic\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}
