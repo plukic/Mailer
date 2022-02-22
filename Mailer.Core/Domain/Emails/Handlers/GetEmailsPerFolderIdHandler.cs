@@ -21,7 +21,7 @@ namespace Mailer.Core.Domain.Emails.Handlers
         }
         public async Task<List<EmailDto>> Handle(GetEmailsPerFolderIdRequest request, CancellationToken cancellationToken)
         {
-            var entityResult = await _emailRepository.ListAsync(new GetQueuedEmailByFolderIdSpecification(request.FolderType), cancellationToken);
+            var entityResult = await _emailRepository.ListAsync(new GetQueuedEmailByFolderIdSpecification(request.FolderType, request.EmailPriority, request.SearchTerm), cancellationToken);
             var mapperResult = _mapper.Map<List<EmailDto>>(entityResult);
             return mapperResult;
         }

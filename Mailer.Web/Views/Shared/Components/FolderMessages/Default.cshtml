@@ -1,18 +1,28 @@
 ﻿@using Mailer.Web.Components
+@using Mailer.Core.Domain.Emails
 @using Humanizer
 @model FolderMessagesViewModel
+
+
 <div class="card card-primary card-outline">
     <div class="card-header">
-        <h3 class="card-title">@Model.FolderName</h3>
-        <div class="card-tools">
-            <div class="input-group input-group-sm">
-                <input type="text" class="form-control" placeholder="Search Mail">
-                <div class="input-group-append">
-                    <div class="btn btn-primary">
-                        <i class="fas fa-search"></i>
+        <h3 class="card-title col-md-4">@Model.FolderName</h3>
+        <div class="card-tools col-md-8">
+            <form asp-action="Search" asp-controller="Folder" ajax="true" ajax-update="@Model.TargetUpdate" asp-route-folderId="@Model.FolderId" asp-route-targetUpdate="@Model.TargetUpdate">
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <select asp-for="@Model.EmailPriority" class="form-control" asp-items="@Model.EmailPriorities"></select>
+                    </div>
+                    <div class="form-group  col-md-6">
+                        <input asp-for="@Model.SearchTerm" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-outline-primary">@Localizer[LocalizationKeys.Search]</button>
                     </div>
                 </div>
-            </div>
+            </form>
+
         </div>
     </div>
     <div class="card-body p-0">
@@ -37,10 +47,8 @@
                             <td class="mailbox-date">@DateTimeConverter.ConvertToLocal(item.CreatedOnUtc).Humanize(false)</td>
                         </tr>
                     }
-
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>

@@ -1,18 +1,21 @@
 ﻿using Ardalis.Specification;
 using Mailer.Core.Domain.Folders;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mailer.Core.Domain.Emails.Specifications
 {
     public class GetQueuedEmailByFolderIdSpecification : Specification<QueuedEmail>
     {
-        public GetQueuedEmailByFolderIdSpecification(FolderType folderId)
+
+
+        public GetQueuedEmailByFolderIdSpecification(FolderType folderId, EmailPriority? emailPriority, string searchTerm)
         {
-            Query.Where(x => x.FolderId == folderId).OrderByDescending(x=>x.CreatedOnUtc);
+            var searchTermNormalized = searchTerm?.ToUpper();
+            Query
+                .Where(x => x.FolderId == folderId)
+                .WhereIf(emailPriority.HasValue, x => x.EmailPriority == emailPriority)
+                .WhereIf(searchTermNormalized.IsNotNullOrEmpty(), x => x.To.ToUpper().Contains(searchTermNormalized))
+                .OrderByDescending(x => x.CreatedOnUtc);
         }
     }
 }

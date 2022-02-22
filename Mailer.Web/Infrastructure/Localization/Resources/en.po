@@ -102,3 +102,5 @@ msgstr "Email deleted successfully"
 
 msgid "MoveToTrash"
 msgstr "Move to trash"
+msgid "SearchByEmail"
+msgstr "Search by email"

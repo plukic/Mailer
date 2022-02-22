@@ -30,6 +30,9 @@ namespace Mailer.Core.Localization
         public const string DeleteMail = nameof(DeleteMail);
         public const string ErrorWhileDeletingEmail = nameof(ErrorWhileDeletingEmail);
         public const string EmailDeletedSuccessfully = nameof(EmailDeletedSuccessfully);
+        public const string All = nameof(All);
+        public const string Search = nameof(Search);
+        public const string SearchByEmail = nameof(SearchByEmail);
 
     }
 }

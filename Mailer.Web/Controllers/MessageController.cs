@@ -59,15 +59,15 @@ namespace Mailer.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Compose(MessageComposeViewModel model, string targetUpdate = null, int? draftEmailId = null)
+        public async Task<IActionResult> Compose(MessageComposeViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                var modelResult = await _emailViewModelService.PrepareMessageComposeModel(draftEmailId, model);
+                var modelResult = await _emailViewModelService.PrepareMessageComposeModel(model.Id, model);
                 return PartialView("_Compose", modelResult.Value);
             }
 
-            var sendRequestDto = _emailViewModelService.PrepareSendMailRequest(draftEmailId, model);
+            var sendRequestDto = _emailViewModelService.PrepareSendMailRequest(model.Id, model);
             var sendMailResponse = await _mediator.Send(new SendEmailRequest(sendRequestDto));
             if (sendMailResponse.IsSuccess)
                 _alertManager.AddSuccess(_localizer[LocalizationKeys.EmailSentSuccessfully]);
@@ -78,15 +78,15 @@ namespace Mailer.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveAsDraft(MessageComposeViewModel model, string targetUpdate = null, int? draftEmailId = null)
+        public async Task<IActionResult> SaveAsDraft(MessageComposeViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                var modelResult = await _emailViewModelService.PrepareMessageComposeModel(draftEmailId, model);
+                var modelResult = await _emailViewModelService.PrepareMessageComposeModel(model.Id, model);
                 return PartialView("_Compose", modelResult.Value);
             }
 
-            var sendRequestDto = _emailViewModelService.PrepareSendMailRequest(draftEmailId, model);
+            var sendRequestDto = _emailViewModelService.PrepareSendMailRequest(model.Id, model);
             var sendMailResponse = await _mediator.Send(new SaveAsDraftRequest(sendRequestDto));
             if (sendMailResponse.IsSuccess)
                 _alertManager.AddSuccess(_localizer[LocalizationKeys.EmailSavedAsDraftSuccessfully]);

@@ -1,12 +1,13 @@
 ﻿@using Mailer.Web.Models.Message
 @model MessageComposeViewModel
 
-<form data-ajax="true"  method="post"
+<form method="post"
+      ajax="true"
       asp-route-targetUpdate="@Model.TargetUpdate"
-      asp-route-id="@Model.Id" 
+      asp-route-draftEmailId="@Model.Id" 
       asp-controller="Message"
       data-ajax-update="@Model.TargetUpdate">
-    <input asp-for="@Model.Subject" class="form-control" type="hidden" />
+    <input asp-for="@Model.Id" class="form-control" type="hidden" />
     <div class="card">
         <div class="card-header with-border">
             <h3 class="card-title">Compose New Message</h3>

@@ -77,10 +77,12 @@ namespace Mailer.Core.Domain.Emails.Handlers
                 return Result<EmailDto>.NotFound();
 
             draftEmail.To = data.To;
+            draftEmail.ToName = data.To;
             draftEmail.Cc = data.Cc;
             draftEmail.Bcc = data.Bcc;
             draftEmail.Subject = data.Subject;
             draftEmail.Body = data.Body;
+            draftEmail.BodyStriped = data.BodyStriped;
             draftEmail.EmailPriority = data.EmailPriority;
 
             await _repository.SaveChangesAsync();

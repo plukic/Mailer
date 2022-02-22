@@ -77,13 +77,17 @@ namespace Mailer.Core.Domain.Emails.Handlers
                 return Result<EmailDto>.NotFound();
 
             draftEmail.To = request.Data.To;
+            draftEmail.ToName = request.Data.To;
+
             draftEmail.Cc = request.Data.Cc;
             draftEmail.Bcc = request.Data.Bcc;
             draftEmail.Subject = request.Data.Subject;
             draftEmail.Body = request.Data.Body;
+            draftEmail.FolderId = Folders.FolderType.Sent;
             draftEmail.EmailPriority = request.Data.EmailPriority;
             draftEmail.SentOnUtc = DateTime.UtcNow;
 
+            await _repository.UpdateAsync(draftEmail);
             await _repository.SaveChangesAsync();
             return Result<EmailDto>.Success(_mapper.Map<EmailDto>(draftEmail));
 

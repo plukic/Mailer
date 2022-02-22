@@ -75,6 +75,8 @@ namespace Mailer.Web.Services.Email
             model.Subject = email.Subject;
             model.Body = email.Body;
             model.EmailPriority = email.EmailPriority;
+            model.EmailPriorities = PopulateEmailPriorities();
+
             model.FolderId=email.FolderId;
             return model;
         }
